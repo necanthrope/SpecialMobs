@@ -3,6 +3,7 @@ package toast.specialMobs.entity.creeper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -14,6 +15,7 @@ import toast.specialMobs.entity.ISpecialMob;
 import toast.specialMobs.entity.SpecialMobData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import toast.specialMobs.entity.ai.EntityAIAvoidScarecrow;
 
 public class Entity_SpecialCreeper extends EntityCreeper implements ISpecialMob {
 
@@ -48,6 +50,7 @@ public class Entity_SpecialCreeper extends EntityCreeper implements ISpecialMob 
 
     public Entity_SpecialCreeper(World world) {
         super(world);
+        this.tasks.addTask(1, new EntityAIAvoidScarecrow(this, Blocks.skull, 6, 1.5D, 1.0D, 7, 16));
     }
 
     // Used to initialize data watcher variables.

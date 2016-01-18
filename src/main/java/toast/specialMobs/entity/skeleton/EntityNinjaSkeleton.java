@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import toast.specialMobs.EffectHelper;
 import toast.specialMobs.EnchantmentSpecial;
 import toast.specialMobs._SpecialMobs;
-import toast.specialMobs.entity.EntityAINinja;
+import toast.specialMobs.entity.ai.EntityAINinja;
 import toast.specialMobs.entity.INinja;
 
 public class EntityNinjaSkeleton extends Entity_SpecialSkeleton implements INinja

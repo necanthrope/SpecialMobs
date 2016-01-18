@@ -1,9 +1,10 @@
-package toast.specialMobs.entity;
+package toast.specialMobs.entity.ai;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
+import toast.specialMobs.entity.INinja;
 
 public class EntityAINinja extends EntityAIBase {
 
