@@ -45,3 +45,37 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# ForgeGradle
+/.gradle
+/gradle
+/build
+/run
+
+# Eclipse
+.classpath
+.project
+/.settings
+/bin
+eclipse/.metadata/
+
+# IntelliJ
+/.idea
+*.iml
+*.ipr
+*.iws
+/out
+
+# Mac Stuff
+.DS_Store
+*.command
+
+#build.gradle
+CREDITS-fml.txt
+forge-1.7.10-10.13.2.1291-changelog.txt
+gradlew
+gradlew.bat
+LICENSE-fml.txt
+MinecraftForge-Credits.txt
+MinecraftForge-License.txt
+README.txt
