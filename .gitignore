@@ -57,7 +57,7 @@ Temporary Items
 .project
 /.settings
 /bin
-eclipse/.metadata/
+eclipse
 
 # IntelliJ
 /.idea
