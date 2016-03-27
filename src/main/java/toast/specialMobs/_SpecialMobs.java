@@ -4,11 +4,16 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Random;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
+import toast.specialMobs.block.ScarecreeperBlock;
+import toast.specialMobs.block.ScarecreeperTileEntity;
 import toast.specialMobs.entity.EntitySpecialFishHook;
 import toast.specialMobs.entity.EntitySpecialSpitball;
 import toast.specialMobs.entity.creeper.EntityEnderCreeper;
@@ -61,6 +66,9 @@ public class _SpecialMobs
 
     /** The path to the textures folder. */
     public static final String TEXTURE_PATH = _SpecialMobs.MODID + ":textures/models/";
+
+    /** The path to the block textures folder. */
+    public static final String BLOCK_TEXTURE_PATH = _SpecialMobs.MODID + ":textures/blocks/";
 
     /** Monster "species" array. */
     public static final String[] MONSTER_KEY = {
@@ -158,6 +166,12 @@ public class _SpecialMobs
             0xfff87e,  0xdc1a00, 0x2d41f4,  0x799c65, 0xab1518, 0x8aa838
         }
     };
+
+    public static Block scarecreeper;
+
+    private void registerBlocks() {
+        GameRegistry.registerBlock(scarecreeper = new ScarecreeperBlock("scarecreeper", Material.cloth), "scarecreeper");
+    }
 
     /** Registers the entities in this mod and adds mob spawns. */
     private void registerMobs() {
@@ -350,7 +364,9 @@ public class _SpecialMobs
         new EventHandler();
         new TickHandler();
         this.registerMobs();
+        this.registerBlocks();
         _SpecialMobs.proxy.registerRenderers();
+        GameRegistry.registerTileEntity(ScarecreeperTileEntity.class, "tileEntityScarecreeper");
     }
 
     /**

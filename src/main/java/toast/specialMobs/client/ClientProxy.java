@@ -1,7 +1,10 @@
 package toast.specialMobs.client;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.client.renderer.RenderBlocks;
 import toast.specialMobs.CommonProxy;
+import toast.specialMobs.block.ScarecreeperTileEntity;
+import toast.specialMobs.block.ScarecreeperTileEntitySpecialRenderer;
 import toast.specialMobs.entity.EntitySpecialFishHook;
 import toast.specialMobs.entity.EntitySpecialSpitball;
 import toast.specialMobs.entity.blaze.Entity_SpecialBlaze;
@@ -42,5 +45,11 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntitySpecialFishHook.class, new RenderSpecialFishHook());
         RenderingRegistry.registerEntityRenderingHandler(EntitySpecialSpitball.class, new RenderSpecialSpitball());
+
+        // Block renderers
+        ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
+                new ScarecreeperTileEntitySpecialRenderer());
+
+
     }
 }

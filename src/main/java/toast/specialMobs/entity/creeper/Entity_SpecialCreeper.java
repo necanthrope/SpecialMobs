@@ -50,7 +50,7 @@ public class Entity_SpecialCreeper extends EntityCreeper implements ISpecialMob 
 
     public Entity_SpecialCreeper(World world) {
         super(world);
-        this.tasks.addTask(1, new EntityAIAvoidScarecrow(this, Blocks.skull, 6, 1.5D, 1.0D, 7, 16));
+        this.tasks.addTask(1, new EntityAIAvoidScarecrow(this, _SpecialMobs.scarecreeper, 6, 1.5D, 1.0D, 7, 16));
     }
 
     // Used to initialize data watcher variables.
