@@ -1,7 +1,9 @@
 package toast.specialMobs.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.item.Item;
 import toast.specialMobs.CommonProxy;
 import toast.specialMobs.block.ScarecreeperTileEntity;
 import toast.specialMobs.block.ScarecreeperTileEntitySpecialRenderer;
@@ -21,12 +23,15 @@ import toast.specialMobs.entity.zombie.Entity_SpecialZombie;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import toast.specialMobs.item.ScarecreeperItem;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
 {
     // Helps this class render blocks.
 	public static final RenderBlocks blockRenderer = new RenderBlocks();
+
+    public static Item scarecreeperItem;
 
     /// Registers render files if this is the client side.
     @Override
@@ -46,8 +51,11 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntitySpecialFishHook.class, new RenderSpecialFishHook());
         RenderingRegistry.registerEntityRenderingHandler(EntitySpecialSpitball.class, new RenderSpecialSpitball());
 
+        // Block renderers
+        ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
+                new ScarecreeperTileEntitySpecialRenderer());
 
-
+        GameRegistry.registerItem(scarecreeperItem = new ScarecreeperItem(), "scarecreeperItem");
 
     }
 }

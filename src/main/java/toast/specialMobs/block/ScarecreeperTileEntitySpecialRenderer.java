@@ -18,7 +18,6 @@ import toast.specialMobs._SpecialMobs;
 @SideOnly(Side.CLIENT)
 public class ScarecreeperTileEntitySpecialRenderer extends TileEntitySpecialRenderer {
 
-    private static final ResourceLocation creeperTexture = new ResourceLocation("textures/entity/creeper/creeper.png");
     private static final ResourceLocation customTexture = new ResourceLocation(_SpecialMobs.BLOCK_TEXTURE_PATH.concat("scarecreeper_block.png"));
     public static ScarecreeperTileEntitySpecialRenderer field_147536_b;
     private final ModelSkeletonHead model = new ModelSkeletonHead(0, 0, 64, 32);

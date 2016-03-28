@@ -6,6 +6,7 @@ import java.util.Random;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityList;
@@ -172,14 +173,9 @@ public class _SpecialMobs
     };
 
     public static Block scarecreeperBlock;
-    public static Item scarecreeperItem;
 
     private void registerBlocks() {
         GameRegistry.registerBlock(scarecreeperBlock = new ScarecreeperBlock("scarecreeperBlock", Material.cloth), "scarecreeperBlock");
-    }
-
-    private void registerItems() {
-        GameRegistry.registerItem(scarecreeperItem = new ScarecreeperItem(), "scarecreeperItem");
     }
 
     /** Registers the entities in this mod and adds mob spawns. */
@@ -354,10 +350,7 @@ public class _SpecialMobs
         _SpecialMobs.debugConsole("Loading in debug mode!");
         Properties.init(new Configuration(event.getSuggestedConfigurationFile()));
         this.registerBlocks();
-        this.registerItems();
-        // Block renderers
-        ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
-                new ScarecreeperTileEntitySpecialRenderer());
+
 
         int id = 0;
         _SpecialMobs.CHANNEL = NetworkRegistry.INSTANCE.newSimpleChannel("SM|EX");
