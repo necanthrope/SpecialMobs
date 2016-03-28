@@ -40,7 +40,7 @@ public class ScarecreeperTileEntitySpecialRenderer extends TileEntitySpecialRend
 
         int meta = pTileEntity.getWorldObj().getBlockMetadata(pTileEntity.xCoord, pTileEntity.yCoord, pTileEntity.zCoord);
 
-        this.bindTexture(creeperTexture);
+        this.bindTexture(customTexture);
 
         float rotation = ((Integer) pTileEntity.getRotation()).floatValue();
 

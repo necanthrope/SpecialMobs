@@ -27,7 +27,7 @@ public class ScarecreeperBlock extends BlockContainer {
     public ScarecreeperBlock(String unlocalizedName, Material material) {
         super(material);
         this.setBlockName(unlocalizedName);
-        this.setBlockTextureName(_SpecialMobs.MODID + ":" + unlocalizedName);
+        //this.setBlockTextureName(_SpecialMobs.MODID + ":" + unlocalizedName);
         this.setCreativeTab(CreativeTabs.tabBlock);
         this.setHardness(2.0F);
         this.setResistance(6.0F);
@@ -50,7 +50,11 @@ public class ScarecreeperBlock extends BlockContainer {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister reg) {}
+    public void registerBlockIcons(IIconRegister reg) {
+
+
+
+    }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
