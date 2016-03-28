@@ -4,21 +4,25 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Random;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
 import toast.specialMobs.block.ScarecreeperBlock;
 import toast.specialMobs.block.ScarecreeperTileEntity;
+import toast.specialMobs.block.ScarecreeperTileEntitySpecialRenderer;
 import toast.specialMobs.entity.EntitySpecialFishHook;
 import toast.specialMobs.entity.EntitySpecialSpitball;
 import toast.specialMobs.entity.creeper.EntityEnderCreeper;
 import toast.specialMobs.entity.creeper.EntityFireCreeper;
 import toast.specialMobs.entity.ghast.EntityMiniGhast;
+import toast.specialMobs.item.ScarecreeperItem;
 import toast.specialMobs.network.MessageExplosion;
 import toast.specialMobs.network.MessageTexture;
 import cpw.mods.fml.common.Mod;
@@ -116,7 +120,7 @@ public class _SpecialMobs
         /* Eventual
         "Blaze", "CaveSpider", "Creeper", "Enderman", "Ghast", "LavaSlime" (0x340000, 0xfcfc00), "PigZombie", "Silverfish", "Skeleton", "Slime", "Spider", "Zombie" */
         /*
-        "Blaze",  "CaveSpider", "Creeper", "Enderman", "Ghast",  "PigZombie", "Silverfish", "Skeleton", "Slime",  "Spider", "Zombie" */
+        "tBlaze",  "CaveSpider", "Creeper", "Enderman", "Ghast",  "PigZombie", "Silverfish", "Skeleton", "Slime",  "Spider", "Zombie" */
         0xf6b201, 0x0c424e,     0x0da70b,  0x161616,   0xf9f9f9, 0xea9393,    0x6e6e6e,     0xc1c1c1,   0x51a03e, 0x342d27, 0x00afaf
     };
     /** Monster "sub-species" color array. Used for spawn eggs. First dimension is the MONSTER_KEY[]. */
@@ -167,10 +171,15 @@ public class _SpecialMobs
         }
     };
 
-    public static Block scarecreeper;
+    public static Block scarecreeperBlock;
+    public static Item scarecreeperItem;
 
     private void registerBlocks() {
-        GameRegistry.registerBlock(scarecreeper = new ScarecreeperBlock("scarecreeper", Material.cloth), "scarecreeper");
+        GameRegistry.registerBlock(scarecreeperBlock = new ScarecreeperBlock("scarecreeperBlock", Material.cloth), "scarecreeperBlock");
+    }
+
+    private void registerItems() {
+        GameRegistry.registerItem(scarecreeperItem = new ScarecreeperItem(), "scarecreeperItem");
     }
 
     /** Registers the entities in this mod and adds mob spawns. */
@@ -344,6 +353,11 @@ public class _SpecialMobs
     public void preInit(FMLPreInitializationEvent event) {
         _SpecialMobs.debugConsole("Loading in debug mode!");
         Properties.init(new Configuration(event.getSuggestedConfigurationFile()));
+        this.registerBlocks();
+        this.registerItems();
+        // Block renderers
+        ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
+                new ScarecreeperTileEntitySpecialRenderer());
 
         int id = 0;
         _SpecialMobs.CHANNEL = NetworkRegistry.INSTANCE.newSimpleChannel("SM|EX");
@@ -364,7 +378,6 @@ public class _SpecialMobs
         new EventHandler();
         new TickHandler();
         this.registerMobs();
-        this.registerBlocks();
         _SpecialMobs.proxy.registerRenderers();
         GameRegistry.registerTileEntity(ScarecreeperTileEntity.class, "tileEntityScarecreeper");
     }

@@ -46,9 +46,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntitySpecialFishHook.class, new RenderSpecialFishHook());
         RenderingRegistry.registerEntityRenderingHandler(EntitySpecialSpitball.class, new RenderSpecialSpitball());
 
-        // Block renderers
-        ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
-                new ScarecreeperTileEntitySpecialRenderer());
+
 
 
     }

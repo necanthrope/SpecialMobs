@@ -7,12 +7,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import toast.specialMobs._SpecialMobs;
+
+import java.util.Random;
 
 /**
  * Created by jtidwell on 2/2/2016.
@@ -48,27 +51,6 @@ public class ScarecreeperBlock extends BlockContainer {
 
     @Override
     public void registerBlockIcons(IIconRegister reg) {}
-    /**
-     * Gets the block's texture. Args: side, meta
-     */
-    /*
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
-    {
-        return Blocks.soul_sand.getBlockTextureFromSide(p_149691_1_);
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister reg) {
-        this.icons[0] = reg.registerIcon(this.textureName + "_bottom");
-        this.icons[1] = reg.registerIcon(this.textureName + "_top");
-        this.icons[2] = reg.registerIcon(this.textureName + "_front");
-        this.icons[3] = reg.registerIcon(this.textureName + "_back");
-        this.icons[4] = reg.registerIcon(this.textureName + "_right");
-        this.icons[5] = reg.registerIcon(this.textureName + "_left");
-    }
-
-    */
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
@@ -99,22 +81,25 @@ public class ScarecreeperBlock extends BlockContainer {
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
                                 EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int l = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 
+        ScarecreeperTileEntity te = (ScarecreeperTileEntity) par1World.getTileEntity(par2, par3, par4);
+        te.setRotation(MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw)));
 
+    }
 
-        if (l == 0)
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
+    /**
+     * Gets an item for the block being called on. Args: world, x, y, z
+     */
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World pWorld, int pWorldX, int pWorldY, int pWorldZ) {
+        return _SpecialMobs.scarecreeperItem;
+    }
 
-        if (l == 1)
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
-
-        if (l == 2)
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
-
-        if (l == 3)
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
-
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+    {
+        return _SpecialMobs.scarecreeperItem;
     }
 
 }

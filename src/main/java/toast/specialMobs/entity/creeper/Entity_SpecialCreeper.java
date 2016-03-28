@@ -3,7 +3,6 @@ package toast.specialMobs.entity.creeper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -50,7 +49,7 @@ public class Entity_SpecialCreeper extends EntityCreeper implements ISpecialMob 
 
     public Entity_SpecialCreeper(World world) {
         super(world);
-        this.tasks.addTask(1, new EntityAIAvoidScarecrow(this, _SpecialMobs.scarecreeper, 6, 1.5D, 1.0D, 7, 16));
+        this.tasks.addTask(1, new EntityAIAvoidScarecrow(this, _SpecialMobs.scarecreeperBlock, 6, 1.5D, 1.0D, 7, 16));
     }
 
     // Used to initialize data watcher variables.
