@@ -23,12 +23,10 @@ import java.util.Random;
  */
 public class ScarecreeperBlock extends BlockContainer {
 
-    public IIcon[] icons = new IIcon[6];
 
     public ScarecreeperBlock(String unlocalizedName, Material material) {
         super(material);
         this.setBlockName(unlocalizedName);
-        //this.setBlockTextureName(_SpecialMobs.MODID + ":" + unlocalizedName);
         this.setCreativeTab(CreativeTabs.tabBlock);
         this.setHardness(2.0F);
         this.setResistance(6.0F);
@@ -40,20 +38,13 @@ public class ScarecreeperBlock extends BlockContainer {
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
-        //return this.icons[side];
-        if (side == 0 || side == 1)
-            return this.icons[side];
-
-        if (side == meta)
-            return this.icons[2];
-
-        return this.icons[3];
+        return this.blockIcon;
     }
 
     @Override
     public void registerBlockIcons(IIconRegister reg) {
 
-        this.blockIcon = reg.registerIcon(_SpecialMobs.MODID + ":" + "scarecreeper_icon");
+        this.blockIcon = reg.registerIcon(_SpecialMobs.MODID + ":" + "scarecreeper_block_icon");
 
     }
 

@@ -170,7 +170,7 @@ public class _SpecialMobs
     public static Block scarecreeperBlock;
 
     private void registerBlocks() {
-        GameRegistry.registerBlock(scarecreeperBlock = new ScarecreeperBlock("scarecreeperBlock", Material.cloth), "scarecreeperBlock");
+        GameRegistry.registerBlock(scarecreeperBlock = new ScarecreeperBlock("scarecreeperBlock", Material.circuits), "scarecreeperBlock");
     }
 
     /** Registers the entities in this mod and adds mob spawns. */

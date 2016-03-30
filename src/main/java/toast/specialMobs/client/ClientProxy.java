@@ -1,7 +1,6 @@
 package toast.specialMobs.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -25,7 +24,6 @@ import toast.specialMobs.entity.zombie.Entity_SpecialZombie;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import toast.specialMobs.item.ScarecreeperItem;
 import toast.specialMobs.particle.EntityPurpleFireFX;
 
 @SideOnly(Side.CLIENT)
@@ -58,7 +56,7 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
                 new ScarecreeperTileEntitySpecialRenderer());
 
-        //GameRegistry.registerItem(scarecreeperItem = new ScarecreeperItem(), "scarecreeperItem");
+        //GameRegistry.registerItem(scarecreeperItem = new ScarecreeperChunkItem(), "scarecreeperChunkItem");
 
     }
 
