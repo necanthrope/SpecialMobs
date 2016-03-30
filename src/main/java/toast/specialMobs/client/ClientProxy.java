@@ -2,6 +2,8 @@ package toast.specialMobs.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.Item;
 import toast.specialMobs.CommonProxy;
@@ -24,6 +26,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import toast.specialMobs.item.ScarecreeperItem;
+import toast.specialMobs.particle.EntityPurpleFireFX;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
@@ -55,7 +58,26 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
                 new ScarecreeperTileEntitySpecialRenderer());
 
-        GameRegistry.registerItem(scarecreeperItem = new ScarecreeperItem(), "scarecreeperItem");
+        //GameRegistry.registerItem(scarecreeperItem = new ScarecreeperItem(), "scarecreeperItem");
 
     }
+
+    @Override
+    public void generateScarecreeperParticles (ScarecreeperTileEntity pEntity) {
+        double motionX = pEntity.getWorldObj().rand.nextGaussian() * 0.02D;
+        double motionY = Math.abs(pEntity.getWorldObj().rand.nextGaussian() * 0.02D);
+        double motionZ = pEntity.getWorldObj().rand.nextGaussian() * 0.02D;
+
+        EntityFX particle = new EntityPurpleFireFX(
+                pEntity.getWorldObj(),
+                pEntity.xCoord + 0.5D, // + pEntity.getWorldObj().rand.nextFloat(),
+                pEntity.yCoord + 0.5D, // + pEntity.getWorldObj().rand.nextFloat(),
+                pEntity.zCoord + 0.5D, // + pEntity.getWorldObj().rand.nextFloat(),
+                motionX,
+                motionY,
+                motionZ
+        );
+        Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+    }
+
 }

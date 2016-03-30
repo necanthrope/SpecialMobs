@@ -1,10 +1,13 @@
 package toast.specialMobs.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import toast.specialMobs._SpecialMobs;
 
 /**
  * Created by jtidwell on 2/7/2016.
@@ -12,6 +15,8 @@ import net.minecraft.tileentity.TileEntity;
 public class ScarecreeperTileEntity extends TileEntity {
 
     private int rotation;
+    private int ticks = 0;
+    private int rolloverTicks = 20;
     private static final String __OBFID = "CL_00010364";
 
     public void writeToNBT(NBTTagCompound nbtTagCompound)
@@ -52,4 +57,12 @@ public class ScarecreeperTileEntity extends TileEntity {
         return this.rotation;
     }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void updateEntity() {
+        if(ticks++ > rolloverTicks) {
+            ticks = 0;
+            _SpecialMobs.proxy.generateScarecreeperParticles(this);
+        }
+    }
 }

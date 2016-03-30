@@ -53,7 +53,7 @@ public class ScarecreeperBlock extends BlockContainer {
     @Override
     public void registerBlockIcons(IIconRegister reg) {
 
-
+        this.blockIcon = reg.registerIcon(_SpecialMobs.MODID + ":" + "scarecreeper_icon");
 
     }
 

@@ -23,6 +23,7 @@ public class ScarecreeperItem extends Item {
         this.setCreativeTab(CreativeTabs.tabDecorations);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
+        this.setTextureName(_SpecialMobs.MODID + ":" + "scarecreeper_icon");
 
     }
 
