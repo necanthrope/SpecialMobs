@@ -4,10 +4,13 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import toast.specialMobs.block.ScarecreeperTileEntity;
 
 import java.util.TreeMap;
 
@@ -95,12 +98,21 @@ public class EntityAIAvoidScarecrow extends EntityAIBase{
                         coords[0] = xc;
                         coords[1] = yc;
                         coords[2] = zc;
+
+                        TileEntity te = theWorld.getTileEntity((int)(theEntity.posX + i),
+                                (int)(theEntity.posY + j),
+                                (int)(theEntity.posZ + k));
+                        if(theEntity instanceof EntityCreeper && te instanceof ScarecreeperTileEntity &&
+                                ((ScarecreeperTileEntity)te).getBurning() == false) {
+                            continue;
+                        }
                         radar.put(distance, coords);
                     }
 
                 }
             }
         }
+
 
         if(radar.keySet().size() > 0) {
             nearestScarecrow = radar.get(radar.firstKey());

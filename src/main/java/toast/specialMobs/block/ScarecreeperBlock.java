@@ -33,6 +33,9 @@ public class ScarecreeperBlock extends BlockContainer {
         this.setStepSound(soundTypeGravel);
         this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
 
+        this.setLightLevel(0.0F);
+        this.setResistance(1000.0F);
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -75,14 +78,12 @@ public class ScarecreeperBlock extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-    {
+                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 
         ScarecreeperTileEntity te = (ScarecreeperTileEntity) par1World.getTileEntity(par2, par3, par4);
         te.setRotation(MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw)));
-
     }
 
     /**

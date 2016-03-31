@@ -17,19 +17,21 @@ public class ScarecreeperTileEntity extends TileEntity {
     private int rotation;
     private int ticks = 0;
     private int rolloverTicks = 20;
+    private boolean burning = false;
     private static final String __OBFID = "CL_00010364";
 
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
         nbtTagCompound.setInteger("Rot", this.rotation);
+        nbtTagCompound.setBoolean("Burn", this.burning);
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
         this.rotation = nbtTagCompound.getInteger("Rot");
-
+        this.burning = nbtTagCompound.getBoolean("Burn");
     }
 
     /**
@@ -47,20 +49,26 @@ public class ScarecreeperTileEntity extends TileEntity {
         this.readFromNBT(pkt.func_148857_g());
     }
 
-    public void setRotation(int rotation)
-    {
+    public void setRotation(int rotation) {
         this.rotation = rotation;
     }
 
-    public int getRotation()
-    {
+    public int getRotation() {
         return this.rotation;
+    }
+
+    public void setBurning (boolean burning) {
+        this.burning = burning;
+    }
+
+    public boolean getBurning() {
+        return burning;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void updateEntity() {
-        if(ticks++ > rolloverTicks) {
+        if(this.burning && ticks++ > rolloverTicks) {
             ticks = 0;
             _SpecialMobs.proxy.generateScarecreeperParticles(this);
         }

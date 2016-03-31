@@ -5,13 +5,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import toast.specialMobs.block.ScarecreeperTileEntity;
 import toast.specialMobs.entity.blaze.EntitySmolderBlaze;
 import toast.specialMobs.entity.pigzombie.EntityPlaguePigZombie;
 import toast.specialMobs.entity.skeleton.EntityPoisonSkeleton;
@@ -146,4 +150,18 @@ public class EventHandler
             TickHandler.markEntityToBeReplaced(entity);
         }
     }
+
+    @SubscribeEvent(priority = EventPriority.NORMAL)
+    public void useFlintAndSteelOnScareCreeper(PlayerInteractEvent event) {
+        ItemStack itemStack = event.entityPlayer.getCurrentEquippedItem();
+        if (itemStack != null && itemStack.getItem() instanceof ItemFlintAndSteel ) {
+            TileEntity tileEntity = event.world.getTileEntity(event.x, event.y, event.z);
+            if (tileEntity instanceof ScarecreeperTileEntity && ((ScarecreeperTileEntity) tileEntity).getBurning() == false) {
+                ((ScarecreeperTileEntity) tileEntity).setBurning(true);
+                event.world.markBlockForUpdate(event.x, event.y, event.z);
+                tileEntity.markDirty();
+            }
+        }
+    }
+
 }
