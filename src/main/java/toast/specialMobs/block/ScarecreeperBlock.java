@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import toast.specialMobs._SpecialMobs;
 import toast.specialMobs.client.ClientProxy;
@@ -100,4 +101,12 @@ public class ScarecreeperBlock extends BlockContainer {
         return ClientProxy.scarecreeperItem;
     }
 
+    @Override
+    public int getLightValue(IBlockAccess world, int posX, int posY, int posZ) {
+        ScarecreeperTileEntity scarecreeperTileEntity = (ScarecreeperTileEntity)world.getTileEntity(posX, posY, posZ);
+        if (scarecreeperTileEntity.getBurning()) {
+            return 7;
+        }
+        return 0;
+    }
 }
