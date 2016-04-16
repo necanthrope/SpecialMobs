@@ -1,11 +1,16 @@
 package toast.specialMobs.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import toast.specialMobs.CommonProxy;
+import toast.specialMobs._SpecialMobs;
 import toast.specialMobs.block.ScarecreeperTileEntity;
 import toast.specialMobs.block.ScarecreeperTileEntitySpecialRenderer;
 import toast.specialMobs.entity.EntitySpecialFishHook;
@@ -24,6 +29,7 @@ import toast.specialMobs.entity.zombie.Entity_SpecialZombie;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import toast.specialMobs.item.ScarecreeperChunkItem;
 import toast.specialMobs.particle.EntityPurpleFireFX;
 
 @SideOnly(Side.CLIENT)
@@ -56,7 +62,20 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
                 new ScarecreeperTileEntitySpecialRenderer());
 
-        //GameRegistry.registerItem(scarecreeperItem = new ScarecreeperChunkItem(), "scarecreeperChunkItem");
+        GameRegistry.registerItem(scarecreeperItem = new ScarecreeperChunkItem(), "scarecreeperChunkItem");
+
+        GameRegistry.addRecipe(new ItemStack(scarecreeperItem), new Object[]{
+                "AAA",
+                "AAA",
+                "AAA",
+                'A', new ItemStack(Items.skull,1,4)
+        });
+
+        GameRegistry.addRecipe(new ItemStack(_SpecialMobs.scarecreeperBlock), new Object[]{
+                "AA",
+                "AA",
+                'A', scarecreeperItem
+        });
 
     }
 

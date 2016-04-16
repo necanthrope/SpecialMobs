@@ -18,7 +18,8 @@ import toast.specialMobs._SpecialMobs;
 @SideOnly(Side.CLIENT)
 public class ScarecreeperTileEntitySpecialRenderer extends TileEntitySpecialRenderer {
 
-    private static final ResourceLocation customTexture = new ResourceLocation(_SpecialMobs.BLOCK_TEXTURE_PATH.concat("scarecreeper_block.png"));
+    private static final ResourceLocation customDarkTexture = new ResourceLocation(_SpecialMobs.BLOCK_TEXTURE_PATH.concat("scarecreeper_block.png"));
+    private static final ResourceLocation customLitTexture = new ResourceLocation(_SpecialMobs.BLOCK_TEXTURE_PATH.concat("lit_scarecreeper_block.png"));
     public static ScarecreeperTileEntitySpecialRenderer field_147536_b;
     private final ModelSkeletonHead model = new ModelSkeletonHead(0, 0, 64, 32);
 
@@ -39,7 +40,12 @@ public class ScarecreeperTileEntitySpecialRenderer extends TileEntitySpecialRend
 
         int meta = pTileEntity.getWorldObj().getBlockMetadata(pTileEntity.xCoord, pTileEntity.yCoord, pTileEntity.zCoord);
 
-        this.bindTexture(customTexture);
+        if(pTileEntity.getBurning()) {
+            this.bindTexture(customLitTexture);
+        }
+        else {
+            this.bindTexture(customDarkTexture);
+        }
 
         float rotation = ((Integer) pTileEntity.getRotation()).floatValue();
 
