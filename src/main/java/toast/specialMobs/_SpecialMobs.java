@@ -10,6 +10,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
 import toast.specialMobs.block.ScarecreeperBlock;
@@ -19,6 +22,7 @@ import toast.specialMobs.entity.EntitySpecialSpitball;
 import toast.specialMobs.entity.creeper.EntityEnderCreeper;
 import toast.specialMobs.entity.creeper.EntityFireCreeper;
 import toast.specialMobs.entity.ghast.EntityMiniGhast;
+import toast.specialMobs.item.ScarecreeperChunkItem;
 import toast.specialMobs.network.MessageExplosion;
 import toast.specialMobs.network.MessageTexture;
 import cpw.mods.fml.common.Mod;
@@ -168,9 +172,27 @@ public class _SpecialMobs
     };
 
     public static Block scarecreeperBlock;
+    public static Item scarecreeperItem;
 
     private void registerBlocks() {
         GameRegistry.registerBlock(scarecreeperBlock = new ScarecreeperBlock("scarecreeperBlock", Material.circuits), "scarecreeperBlock");
+    }
+
+    private void registerItems() {
+        GameRegistry.registerItem(scarecreeperItem = new ScarecreeperChunkItem(), "scarecreeperChunkItem");
+
+        GameRegistry.addRecipe(new ItemStack(scarecreeperItem), new Object[]{
+                "AAA",
+                "AAA",
+                "AAA",
+                'A', new ItemStack(Items.skull,1,4)
+        });
+
+        GameRegistry.addRecipe(new ItemStack(_SpecialMobs.scarecreeperBlock), new Object[]{
+                "AA",
+                "AA",
+                'A', scarecreeperItem
+        });
     }
 
     /** Registers the entities in this mod and adds mob spawns. */
@@ -345,6 +367,7 @@ public class _SpecialMobs
         _SpecialMobs.debugConsole("Loading in debug mode!");
         Properties.init(new Configuration(event.getSuggestedConfigurationFile()));
         this.registerBlocks();
+        this.registerItems();
 
 
         int id = 0;

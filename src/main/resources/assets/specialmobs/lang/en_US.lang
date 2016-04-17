@@ -127,3 +127,6 @@ entity.SpecialMobs.FishingZombie.name=Fishing Zombie
 entity.SpecialMobs.GiantZombie.name=Giant Zombie
 entity.SpecialMobs.HungryZombie.name=Hungry Zombie
 entity.SpecialMobs.PlagueZombie.name=Plague Zombie
+
+tile.SpecialMobs.Scarecreeper.name=Scarecreeper
+item.SpecialMobs.ScarecreeperChunk.name=Scarecreeper Chunk

@@ -62,21 +62,6 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(ScarecreeperTileEntity.class,
                 new ScarecreeperTileEntitySpecialRenderer());
 
-        GameRegistry.registerItem(scarecreeperItem = new ScarecreeperChunkItem(), "scarecreeperChunkItem");
-
-        GameRegistry.addRecipe(new ItemStack(scarecreeperItem), new Object[]{
-                "AAA",
-                "AAA",
-                "AAA",
-                'A', new ItemStack(Items.skull,1,4)
-        });
-
-        GameRegistry.addRecipe(new ItemStack(_SpecialMobs.scarecreeperBlock), new Object[]{
-                "AA",
-                "AA",
-                'A', scarecreeperItem
-        });
-
     }
 
     @Override

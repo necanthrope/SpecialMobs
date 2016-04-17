@@ -16,7 +16,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import toast.specialMobs._SpecialMobs;
-import toast.specialMobs.client.ClientProxy;
 
 import java.util.Random;
 
@@ -37,6 +36,7 @@ public class ScarecreeperBlock extends BlockContainer {
 
         this.setLightLevel(0.0F);
         this.setResistance(1000.0F);
+        this.setBlockName(_SpecialMobs.MODID + ".Scarecreeper");
 
     }
 
@@ -93,13 +93,13 @@ public class ScarecreeperBlock extends BlockContainer {
      */
     @SideOnly(Side.CLIENT)
     public Item getItem(World pWorld, int pWorldX, int pWorldY, int pWorldZ) {
-        return ClientProxy.scarecreeperItem;
+        return _SpecialMobs.scarecreeperItem;
     }
 
     @SideOnly(Side.CLIENT)
     public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
     {
-        return ClientProxy.scarecreeperItem;
+        return _SpecialMobs.scarecreeperItem;
     }
 
     @Override

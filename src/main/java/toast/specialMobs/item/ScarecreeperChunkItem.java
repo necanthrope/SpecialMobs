@@ -12,7 +12,6 @@ import toast.specialMobs._SpecialMobs;
 /**
  * Created by jtidwell on 3/27/2016.
  */
-@SideOnly(Side.CLIENT)
 public class ScarecreeperChunkItem extends Item {
 
     public ScarecreeperChunkItem() {
@@ -20,8 +19,8 @@ public class ScarecreeperChunkItem extends Item {
         this.setCreativeTab(CreativeTabs.tabDecorations);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
-        this.setTextureName(_SpecialMobs.MODID + ":" + "scarecreeper_icon");
-        this.setUnlocalizedName(_SpecialMobs.MODID + "_scarecreeperItem");
+        this.setTextureName(_SpecialMobs.MODID + ":" + "scarecreeper_chunk_icon");
+        this.setUnlocalizedName(_SpecialMobs.MODID + ".ScarecreeperChunk");
 
     }
 
