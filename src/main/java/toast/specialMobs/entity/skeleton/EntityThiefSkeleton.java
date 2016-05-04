@@ -13,10 +13,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import toast.specialMobs.EffectHelper;
 import toast.specialMobs.MobHelper;
+import toast.specialMobs.Properties;
 import toast.specialMobs._SpecialMobs;
 
 public class EntityThiefSkeleton extends Entity_SpecialSkeleton
 {
+
+    private static final double STEAL_CHANCE = Properties.getDouble(Properties.STATS, "thief_skeleton_steal_chance");
+    private static final double LOOT_CHANCE = Properties.getDouble(Properties.STATS, "thief_skeleton_pick_up_loot_chance");
+
     @SuppressWarnings("hiding")
     public static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
         new ResourceLocation(_SpecialMobs.TEXTURE_PATH + "skeleton/thief.png"),
@@ -26,7 +31,7 @@ public class EntityThiefSkeleton extends Entity_SpecialSkeleton
     public EntityThiefSkeleton(World world) {
         super(world);
         this.getSpecialData().setTextures(EntityThiefSkeleton.TEXTURES);
-        this.experienceValue += 2;
+        this.experienceValue += 3;
     }
 
     /// Override to set the attack AI to use.
@@ -41,16 +46,24 @@ public class EntityThiefSkeleton extends Entity_SpecialSkeleton
     public void adjustTypeAttributes() {
         this.getSpecialData().multAttribute(SharedMonsterAttributes.movementSpeed, 1.3);
         this.setCurrentItemOrArmor(0, null);
-        this.setCanPickUpLoot(true);
+        if(this.rand.nextDouble() < LOOT_CHANCE) {
+            this.setCanPickUpLoot(true);
+        }
+        else {
+            this.setCanPickUpLoot(false);
+        }
     }
 
     /// Overridden to modify attack effects.
     @Override
     protected void onTypeAttack(Entity target) {
         if (target instanceof EntityPlayer) {
-            ItemStack stolen = MobHelper.removeHeldItem((EntityPlayer)target);
-            if (stolen != null) {
-                this.entityDropItem(stolen, 0.0F);
+            Double check = this.rand.nextDouble();
+            if (check < STEAL_CHANCE) {
+                ItemStack stolen = MobHelper.removeHeldItem((EntityPlayer) target);
+                if (stolen != null) {
+                    this.entityDropItem(stolen, 0.0F);
+                }
             }
         }
     }
