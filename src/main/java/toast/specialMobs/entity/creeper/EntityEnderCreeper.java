@@ -1,5 +1,6 @@
 package toast.specialMobs.entity.creeper;
 
+import java.util.TreeMap;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
@@ -13,6 +14,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +23,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import toast.specialMobs.EffectHelper;
 import toast.specialMobs._SpecialMobs;
+import toast.specialMobs.block.ScarecreeperTileEntity;
 
 public class EntityEnderCreeper extends Entity_SpecialCreeper
 {
@@ -28,6 +32,13 @@ public class EntityEnderCreeper extends Entity_SpecialCreeper
         new ResourceLocation(_SpecialMobs.TEXTURE_PATH + "creeper/ender.png"),
         new ResourceLocation(_SpecialMobs.TEXTURE_PATH + "creeper/ender_eyes.png")
     };
+
+    private int radarRange = 6;
+    private Double[] nearestScarecrow;
+    private double nearSpeed = 1.5;
+    private double farSpeed = 1.0;
+    private int nearRange = 7;
+    private int farRange = 15;
 
     /// The speed boost when attacking. Identical to an enderman's speed boost.
     private static final UUID attackingSpeedBoostUUID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
@@ -56,6 +67,9 @@ public class EntityEnderCreeper extends Entity_SpecialCreeper
     /// Returns true if this mob should use the new AI.
     @Override
     public boolean isAIEnabled() {
+        if (nearestScarecrow != null) {
+            return true;
+        }
         return false;
     }
 
@@ -112,6 +126,9 @@ public class EntityEnderCreeper extends Entity_SpecialCreeper
     /// Called every tick while this entity is alive.
     @Override
     public void onLivingUpdate() {
+
+        scanForScarecrow();
+
         if (this.lastEntityToAttack != this.entityToAttack) {
             IAttributeInstance attribute = this.getEntityAttribute(SharedMonsterAttributes.movementSpeed);
             attribute.removeModifier(EntityEnderCreeper.attackingSpeedBoost);
@@ -245,4 +262,52 @@ public class EntityEnderCreeper extends Entity_SpecialCreeper
         this.worldObj.playSoundAtEntity(this, "mob.endermen.portal", 1.0F, 1.0F);
         return true;
     }
+
+    private void scanForScarecrow() {
+
+        int bottom = radarRange * -1;
+        int top = radarRange + 1;
+
+        TreeMap<Double, Double[]> radar = new TreeMap<Double, Double[]>();
+
+        for (int i = bottom; i < top; i++) {
+            for (int j = bottom; j < top; j++) {
+                for (int k = bottom; k < top; k++) {
+                    Block targetBlock = worldObj.getBlock(
+                            (int) (this.posX + i),
+                            (int) (this.posY + j),
+                            (int) (this.posZ + k));
+                    if (targetBlock.getClass() == _SpecialMobs.scarecreeperBlock.getClass()) {
+
+                        double xc = this.posX + (double) i;
+                        double yc = this.posY + (double) j;
+                        double zc = this.posZ + (double) k;
+
+                        Double distance = this.getDistance(xc, yc, zc);
+                        Double[] coords = new Double[3];
+                        coords[0] = xc;
+                        coords[1] = yc;
+                        coords[2] = zc;
+
+                        TileEntity te = worldObj.getTileEntity((int) (this.posX + i),
+                                (int) (this.posY + j),
+                                (int) (this.posZ + k));
+                        if (te instanceof ScarecreeperTileEntity &&
+                                ((ScarecreeperTileEntity) te).getBurning() == false) {
+                            continue;
+                        }
+                        radar.put(distance, coords);
+                    }
+
+                }
+            }
+        }
+        if(radar.keySet().size() > 0) {
+            nearestScarecrow = radar.get(radar.firstKey());
+        }
+        else {
+            nearestScarecrow = null;
+        }
+    }
+
 }

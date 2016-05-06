@@ -59,6 +59,14 @@ public class EntityAIAvoidScarecrow extends EntityAIBase{
             return false;
         }
 
+        theWorld.spawnParticle("splash",
+                theEntity.posX + (theWorld.rand.nextDouble() - 0.5) * theEntity.width,
+                theEntity.posY + theWorld.rand.nextDouble() * theEntity.height - 0.25,
+                theEntity.posZ + (theWorld.rand.nextDouble() - 0.5) * theEntity.width,
+                (theWorld.rand.nextDouble() - 0.5) * 2.0,
+                -theWorld.rand.nextDouble(),
+                (theWorld.rand.nextDouble() - 0.5) * 2.0);
+
         Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(
                 this.theEntity, farRange, nearRange,
                 Vec3.createVectorHelper(nearestScarecrow[0], nearestScarecrow[1], nearestScarecrow[2]));
