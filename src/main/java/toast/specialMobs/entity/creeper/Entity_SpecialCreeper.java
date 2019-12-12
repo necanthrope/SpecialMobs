@@ -324,4 +324,10 @@ public class Entity_SpecialCreeper extends EntityCreeper implements ISpecialMob 
     public boolean isPotionApplicable(PotionEffect effect) {
         return this.getSpecialData().isPotionApplicable(effect);
     }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return Properties.getInt(Properties.BASE_SPAWNING, Properties.MAX_CREEPER_PER_CHUNK);
+    }
 }

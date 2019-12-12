@@ -313,4 +313,10 @@ public class Entity_SpecialSpider extends EntitySpider implements ISpecialMob, I
     public boolean isPotionApplicable(PotionEffect effect) {
         return this.getSpecialData().isPotionApplicable(effect);
     }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return Properties.getInt(Properties.BASE_SPAWNING, Properties.MAX_SPIDER_PER_CHUNK);
+    }
 }

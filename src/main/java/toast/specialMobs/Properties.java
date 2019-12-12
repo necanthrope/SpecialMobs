@@ -20,9 +20,21 @@ public abstract class Properties {
     private static final HashMap<String, Object> map = new HashMap();
     /// Common category names.
     public static final String ENCHANTS = "_enchants";
+    public static final String BASE_SPAWNING = "_base_spawning";
     public static final String SPAWNING = "_extra_spawning";
     public static final String GENERAL = "_general";
     public static final String STATS = "_mob_stats";
+
+    // Base spawning config property names.
+    public static int DEFAULT_MAX_SPAWNED_IN_CHUNK = 4;
+    public static final String MAX_CAVE_SPIDER_PER_CHUNK = "max_cave_spider_per_chunk";
+    public static final String MAX_CREEPER_PER_CHUNK = "max_creeper_per_chunk";
+    public static final String MAX_ENDERMAN_PER_CHUNK = "max_enderman_per_chunk";
+    public static final String MAX_SKELETON_PER_CHUNK = "max_skeleton_per_chunk";
+    public static final String MAX_SLIME_PER_CHUNK = "max_slime_per_chunk";
+    public static final String MAX_SPIDER_PER_CHUNK = "max_spider_per_chunk";
+    public static final String MAX_ZOMBIE_PER_CHUNK = "max_zombie_per_chunk";
+
 
     /// Property array, matched up to MONSTER_KEY[], vanilla monster species will only exist if the same index here is true.
     private static boolean[] monsterVanilla = new boolean[_SpecialMobs.MONSTER_KEY.length];
@@ -84,9 +96,18 @@ public abstract class Properties {
         Properties.add(config, Properties.STATS, "villager_infection", 1.0, 0.0, 1.0, "(0 <= x <= 1) Chance that a villager will be infected when killed by a zombie. Default is 100%.");
         Properties.add(config, Properties.STATS, "xray_ghosts", false, "(True/false) If false, ghost spiders and faint ghasts will require line of sight to aggro, unlike their normal counterparts. Default is false.");
 
+        Properties.add(config, Properties.BASE_SPAWNING, Properties.MAX_CAVE_SPIDER_PER_CHUNK, Properties.DEFAULT_MAX_SPAWNED_IN_CHUNK, "(1 <= x < = 4) Maximum number of cave spiders per chunk to spawn. Default is 4. Exceeding 4 may cause lag.");
+        Properties.add(config, Properties.BASE_SPAWNING, Properties.MAX_CREEPER_PER_CHUNK, Properties.DEFAULT_MAX_SPAWNED_IN_CHUNK, "(1 <= x < = 4) Maximum number of creepers per chunk to spawn. Default is 4. Exceeding 4 may cause lag.");
+        Properties.add(config, Properties.BASE_SPAWNING, Properties.MAX_ENDERMAN_PER_CHUNK, Properties.DEFAULT_MAX_SPAWNED_IN_CHUNK, "(1 <= x < = 4) Maximum number of endermen per chunk to spawn. Default is 4. Exceeding 4 may cause lag.");
+        Properties.add(config, Properties.BASE_SPAWNING, Properties.MAX_SKELETON_PER_CHUNK, Properties.DEFAULT_MAX_SPAWNED_IN_CHUNK, "(1 <= x < = 4) Maximum number of skeletons per chunk to spawn. Default is 4. Exceeding 4 may cause lag.");
+        Properties.add(config, Properties.BASE_SPAWNING, Properties.MAX_SLIME_PER_CHUNK, Properties.DEFAULT_MAX_SPAWNED_IN_CHUNK, "(1 <= x < = 4) Maximum number of slimes per chunk to spawn. Default is 4. Exceeding 4 may cause lag.");
+        Properties.add(config, Properties.BASE_SPAWNING, Properties.MAX_SPIDER_PER_CHUNK, Properties.DEFAULT_MAX_SPAWNED_IN_CHUNK, "(1 <= x < = 4) Maximum number of spiders per chunk to spawn. Default is 4. Exceeding 4 may cause lag.");
+        Properties.add(config, Properties.BASE_SPAWNING, Properties.MAX_ZOMBIE_PER_CHUNK, Properties.DEFAULT_MAX_SPAWNED_IN_CHUNK, "(1 <= x < = 4) Maximum number of zombies per chunk to spawn. Default is 4. Exceeding 4 may cause lag.");
+
         Properties.init(config, "monster", _SpecialMobs.MONSTER_KEY, _SpecialMobs.MONSTER_TYPES, Properties.monsterVanilla, Properties.monsterSpawn, Properties.monsterWeights);
 
         config.addCustomCategoryComment(Properties.ENCHANTS, "Ids for all enchantments added by this mod. Set the id to -1 to disable any specific enchantment.");
+        config.addCustomCategoryComment(Properties.BASE_SPAWNING, "Options for mobs\' spawn rate per chunk.");
         config.addCustomCategoryComment(Properties.SPAWNING, "Weighted chances for each additional spawn. Set the weight to 0 to disable the spawn.");
         config.addCustomCategoryComment(Properties.GENERAL, "Spawn rates for each mob type and miscellaneous options.");
         config.addCustomCategoryComment(Properties.STATS, "Additional options for mobs\' stats, such as the chance for the mob to have a bow or to be unusually hostile.");

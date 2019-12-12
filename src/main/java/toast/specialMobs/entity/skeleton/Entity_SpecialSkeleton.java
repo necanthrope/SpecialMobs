@@ -360,4 +360,10 @@ public class Entity_SpecialSkeleton extends EntitySkeleton implements ISpecialMo
     public boolean isPotionApplicable(PotionEffect effect) {
         return this.getSpecialData().isPotionApplicable(effect);
     }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return Properties.getInt(Properties.BASE_SPAWNING, Properties.MAX_SKELETON_PER_CHUNK);
+    }
 }

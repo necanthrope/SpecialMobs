@@ -314,4 +314,10 @@ public class Entity_SpecialZombie extends EntityZombie implements ISpecialMob, I
     public boolean isPotionApplicable(PotionEffect effect) {
         return this.getSpecialData().isPotionApplicable(effect);
     }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return Properties.getInt(Properties.BASE_SPAWNING, Properties.MAX_ZOMBIE_PER_CHUNK);
+    }
 }

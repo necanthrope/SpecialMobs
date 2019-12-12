@@ -187,4 +187,10 @@ public class Entity_SpecialEnderman extends EntityEnderman implements ISpecialMo
             }
         }
     }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return Properties.getInt(Properties.BASE_SPAWNING, Properties.MAX_ENDERMAN_PER_CHUNK);
+    }
 }

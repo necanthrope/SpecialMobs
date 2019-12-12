@@ -10,8 +10,10 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import toast.specialMobs.block.ScarecreeperTileEntity;
 
+import java.util.Random;
 import java.util.TreeMap;
 
 /**
@@ -171,5 +173,13 @@ public class EntityAIAvoidScarecrow extends EntityAIBase{
         {
             this.theEntity.getNavigator().setSpeed(this.farSpeed);
         }
+
+        Random rand = new Random();
+        WorldServer worldServer = (WorldServer) theEntity.worldObj;
+        worldServer.func_147487_a("splash",
+                theEntity.posX + (rand.nextDouble() - 0.5D) * (double)theEntity.width,
+                theEntity.posY + rand.nextDouble() * (double)theEntity.height - 0.25D,
+                theEntity.posZ + (rand.nextDouble() - 0.5D) * (double)theEntity.width,
+                5, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 }

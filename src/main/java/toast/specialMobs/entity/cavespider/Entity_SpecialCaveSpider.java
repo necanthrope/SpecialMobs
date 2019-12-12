@@ -304,4 +304,10 @@ public class Entity_SpecialCaveSpider extends EntityCaveSpider implements ISpeci
     public boolean isPotionApplicable(PotionEffect effect) {
         return this.getSpecialData().isPotionApplicable(effect);
     }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return  Properties.getInt(Properties.BASE_SPAWNING, Properties.MAX_CAVE_SPIDER_PER_CHUNK);
+    }
 }

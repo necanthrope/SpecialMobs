@@ -299,4 +299,10 @@ public class Entity_SpecialSlime extends EntitySlime implements ISpecialMob
     public boolean isPotionApplicable(PotionEffect effect) {
         return this.getSpecialData().isPotionApplicable(effect);
     }
+
+    @Override
+    public int getMaxSpawnedInChunk()
+    {
+        return Properties.getInt(Properties.BASE_SPAWNING, Properties.MAX_SLIME_PER_CHUNK);
+    }
 }
